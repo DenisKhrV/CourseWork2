@@ -2,6 +2,7 @@ package pro.sky.CourseWork2.examinerservice.service;
 
 import org.junit.jupiter.api.Test;
 import pro.sky.CourseWork2.examinerservice.domain.Question;
+import pro.sky.CourseWork2.examinerservice.repository.JavaQuestionRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JavaQuestionServiceTest {
-    JavaQuestionService javaQuestionService = new JavaQuestionService();
+    JavaQuestionRepository questionRepository = new JavaQuestionRepository();
+    JavaQuestionService javaQuestionService = new JavaQuestionService(questionRepository );
 
     @Test
     void add_success() {
@@ -17,7 +19,7 @@ class JavaQuestionServiceTest {
         String question = "Вопрос";
         String answer = "Ответ";
         Question actualQuestion = javaQuestionService.add(question, answer);
-        assertTrue(javaQuestionService.questions.contains(exceptionQuestion));
+        assertTrue(questionRepository.questions.contains(exceptionQuestion));
         assertEquals(exceptionQuestion, actualQuestion);
     }
 
@@ -25,7 +27,7 @@ class JavaQuestionServiceTest {
     void testAdd_success() {
         Question exceptionQuestion = new Question("Вопрос", "Ответ");
         Question actualQuestion = javaQuestionService.add(exceptionQuestion);
-        assertTrue(javaQuestionService.questions.contains(exceptionQuestion));
+        assertTrue(questionRepository.questions.contains(exceptionQuestion));
         assertEquals(exceptionQuestion, actualQuestion);
     }
 
@@ -36,7 +38,7 @@ class JavaQuestionServiceTest {
         String answer = "Ответ";
         javaQuestionService.add(question, answer);
         Question actualQuestion = javaQuestionService.remove(question, answer);
-        assertFalse(javaQuestionService.questions.contains(exceptionQuestion));
+        assertFalse(questionRepository.questions.contains(exceptionQuestion));
         assertEquals(exceptionQuestion, actualQuestion);
     }
 

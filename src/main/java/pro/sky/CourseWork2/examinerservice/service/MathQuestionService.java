@@ -6,11 +6,12 @@ import pro.sky.CourseWork2.examinerservice.domain.Question;
 import pro.sky.CourseWork2.examinerservice.repository.QuestionRepository;
 
 import java.util.*;
+
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
 
-    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
@@ -29,9 +30,9 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question remove(String question, String answer) {
-        Question removedQuestion = new Question(question, answer);
-        questionRepository.remove(removedQuestion);
-        return removedQuestion;
+        Question questionForRemove = new Question(question, answer);
+        questionRepository.remove(questionForRemove);
+        return questionForRemove;
     }
 
     @Override
